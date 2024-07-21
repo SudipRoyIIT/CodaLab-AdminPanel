@@ -1,7 +1,14 @@
-// vite.config.js
 import { defineConfig } from "vite";
-import wasm from "vite-plugin-wasm";
+import { resolve } from "path";
+import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  plugins: [wasm()]
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, "index.html"),
+      },
+    },
+  },
+  plugins: [react()],
 });
