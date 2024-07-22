@@ -63,7 +63,10 @@ const Journals = () => {
   const handleButtonClick = () => {
     setInput(search);
   };
-
+  const API_HEADER = {
+    "Content-Type": "application/json",
+    authorization: "Bearer " + localStorage.getItem("accessToken"),
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -71,11 +74,7 @@ const Journals = () => {
           `${BASE_URL}/api/${afApi}/private/getASinglePublication/Journal/${input}`,
           {
             method: "GET",
-            headers:{
-              "Content-Type": "application/json",
-              "authorization":'Bearer ' + localStorage.getItem('accessToken'),
-            }
-   
+            headers: API_HEADER,
           }
         );
         if (!response.ok) {

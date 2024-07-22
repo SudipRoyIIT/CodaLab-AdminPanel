@@ -1,7 +1,7 @@
 // apiService.js
 
 const BASE_URL =
-  "http://ec2-65-0-205-116.ap-south-1.compute.amazonaws.com:3001"; // Replace with your actual API base URL
+  "https://ec2-65-0-205-116.ap-south-1.compute.amazonaws.com:3001"; // Replace with your actual API base URL
 
 export async function updatePost(id, updatedData) {
   try {

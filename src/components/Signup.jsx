@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { Box, Typography, TextField, Button, Container, Snackbar } from '@mui/material';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import {createUserWithEmailAndPassword} from 'firebase/auth'
 import { Subadmin } from './firbase';
-import 'react-toastify/dist/ReactToastify.css';
 
 // Custom theme with sky blue background
 const theme = createTheme({
@@ -15,24 +16,18 @@ const theme = createTheme({
 });
 
 const Signup = () => {
-  const [openSnackbar, setOpenSnackbar] = useState(false); // State for Snackbar visibility
+  const [openSnackbar, setOpenSnackbar] = useState(false); 
   const [email,setEmail] = useState('');
   const [password,setPassword] = useState('')
   const handleSubmit = (e) => {
     e.preventDefault();
     createUserWithEmailAndPassword(Subadmin, email, password)
-    .then((userCredential) => {
-      // Signed up 
-      const user = userCredential.user;
-      console.log(user)
-       setOpenSnackbar(true);
-      // ...
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-     toast.error('User already exists!',{
-      position: "top-right",
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        setOpenSnackbar(true);
+        toast.success("Successfully signed up!", {
+          position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
           closeOnClick: true,
@@ -40,13 +35,22 @@ const Signup = () => {
           draggable: true,
           progress: undefined,
         });
-      // ..
-    });
-    // Simulate successful signup
-    // For real use, handle signup logic with API calls or backend integration
-    // For demonstration, just showing the Snackbar
-  
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        toast.error(errorMessage, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+      });
   };
+
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
