@@ -1,7 +1,6 @@
 // apiService.js
 
-const BASE_URL =
-  "https://ec2-65-0-205-116.ap-south-1.compute.amazonaws.com:3001"; // Replace with your actual API base URL
+const BASE_URL = import.meta.env.VITE_BASE_URL; 
 
 export async function updatePost(id, updatedData) {
   try {
@@ -9,7 +8,7 @@ export async function updatePost(id, updatedData) {
          
       `${BASE_URL}/api/Admin/private/updateNews/${id}`,
       {
-        method: "PUT", // or 'PATCH' depending on your API endpoint
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
